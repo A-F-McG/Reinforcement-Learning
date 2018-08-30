@@ -1,0 +1,43 @@
+Question 2
+
+Part 1)
+
+After evaluating a policy, to get a better policy than what we have, we do policy improvement. 
+
+The way this works is we take our deterministic policy, select a state and look at the action our policy tells us to take at that state. 
+Next, we select a different action for this state and this state only, and then follow our policy in all other future states. We call this 
+policy with the changed action our new policy. We evaluate whether our Q-function is better using our original policy or our new policy. 
+If our new policy returns a higher Q-function, then we update our policy and use the new one. If it doesn’t, then we stick with our original policy. 
+
+We extend this to look over all states and all actions and this is policy improvement. 
+
+The policy improvement algorithm will return to us one improved policy. In order to get an optimal policy, we evaluate the new policy via 
+policy evaluation, then update that policy using policy improvement and continue this cycle until policy(x) is equal to policy(x+1), meaning 
+that our policy is no longer being improved and we have reached an optimal policy. This is called policy iteration.
+
+Should we run policy iteration and the new policy is not better than, but the same as, the last policy, then we conclude that both policies 
+are optimal. We can choose to make the policy deterministic by just selecting one action (should two or more actions from a state result in 
+the same evaluation score). We break these ties in a consistent way, for example not updating to a new policy action if the state evaluation 
+is not better than, but only the same as the current policy action, as well as always picking the action left over up and up over right if there are still ties. 
+
+Should we want to, we can also extend policy improvement (and policy evaluation and iteration) to stochastic policies. In this case, if more 
+than one action from a state both result in an optimal policy, then the probability of taking those actions from that state is split in some 
+way, and all actions from the state which would not result in an optimal policy are given a transition probability of zero. In this assignment, 
+it would not have been possible to return a stochastic policy since we were using a greedy deterministic policy improvement, meaning for each 
+state we only would have one action in our policy even if other actions gave the same value evaluation. 
+
+
+Part 2)
+
+The policy iteration procedure would still converge to an optimal policy because no matter the starting policy, running the policy iteration 
+algorithm on a finite Markov Decision Process will always result in convergence (as given in section 4.3 of Reinforcement Learning: an Introduction by 
+Richard S. Sutton and Andrew G. Barto). We have a finite MDP here as we have a finite number of states, actions and rewards, so this statement holds 
+and policy iteration will converge.
+
+We would take the last policy we calculated and perform policy evaluation on it using the new reward function. Then for every state, we would 
+still calculate whether taking a different action would result in a better policy in policy improvement, which it likely would since now the 
+reward function has changed. Then we would continue policy iteration as before until convergence. 
+
+Note that while policy iteration will converge and we will receive a so-called optimal policy, if the reward function poorly reflects the environment, 
+then the agent may not behave in what we would expect to be a good manner. 
+
