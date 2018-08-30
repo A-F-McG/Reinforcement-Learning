@@ -1,0 +1,15 @@
+
+1. Policy evaulation: I did the TD-learning algorithm. 
+
+2. Implementing control algorithm: I implemented this as well as completing the bonus, where my own features were the number of road squares, off-road squares aand car squares in the space the agent could see (using the rewards to get these numbers). 
+
+
+
+
+
+
+
+
+
+
+
